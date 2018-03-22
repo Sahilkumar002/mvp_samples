@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import devil.mvplogin.R;
+import devil.mvplogin.models.retrofit.RestClient;
 import devil.mvplogin.presenters.LoginPresenter;
 import devil.mvplogin.viewInterfaces.LoginView;
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements LoginView {
 
         findViewById(R.id.btnLogin).setOnClickListener(v -> loginPresenter.validateCredts(mUserName.getText().toString().trim(),
                 mPassword.getText().toString().trim()));
+
+
     }
 
     @Override
