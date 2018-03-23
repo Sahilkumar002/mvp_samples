@@ -1,4 +1,4 @@
-package devil.mvplogin.models.interactors;
+package devil.mvplogin.models;
 
 import devil.mvplogin.models.retrofit.OnResponseCallBack;
 import retrofit2.Call;

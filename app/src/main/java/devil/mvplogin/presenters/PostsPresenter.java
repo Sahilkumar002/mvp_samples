@@ -2,7 +2,6 @@ package devil.mvplogin.presenters;
 
 import java.util.List;
 
-import devil.mvplogin.models.interactors.BaseInteractor;
 import devil.mvplogin.models.retrofit.OnResponseCallBack;
 import devil.mvplogin.models.retrofit.RestClient;
 import devil.mvplogin.models.retrofit.pojos.Posts;
@@ -16,11 +15,11 @@ import retrofit2.Response;
 public class PostsPresenter extends BasePresenter {
 
     private PostView postView;
-    private BaseInteractor interactor;
+//    BaseInteractor</*List<Posts>*/> interactor;
 
     public PostsPresenter(PostView postView) {
         this.postView = postView;
-        interactor = new BaseInteractor();
+        attachView(postView);
     }
 
     public void loadPosts() {
@@ -31,9 +30,9 @@ public class PostsPresenter extends BasePresenter {
                     public void onSuccess(Response<?> response) {
                         postView.dismissDialog();
                         try {
-                            if (response.code()==200 && response.body()!=null){
+                            if (response.code() == 200 && response.body() != null) {
                                 postView.updateList((List<Posts>) response.body());
-                            }else {
+                            } else {
                                 postView.showMessage("API ERROR");
                             }
 

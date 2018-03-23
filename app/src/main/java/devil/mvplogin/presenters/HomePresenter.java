@@ -4,7 +4,7 @@ package devil.mvplogin.presenters;
 import java.util.List;
 
 import devil.mvplogin.utils.ApplicationGlobal;
-import devil.mvplogin.models.interactors.BaseInteractor;
+import devil.mvplogin.models.BaseInteractor;
 import devil.mvplogin.models.retrofit.pojos.Users;
 import devil.mvplogin.models.retrofit.OnResponseCallBack;
 import devil.mvplogin.models.retrofit.RestClient;

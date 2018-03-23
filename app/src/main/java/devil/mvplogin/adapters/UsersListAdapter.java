@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import devil.mvplogin.R;
 import devil.mvplogin.models.retrofit.pojos.Users;
 import devil.mvplogin.utils.GeneralFunctions;
@@ -49,11 +51,11 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
     }
 
     class UserHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        @BindView(R.id.tvUserName) TextView textView;
 
-        public UserHolder(View itemView) {
+        UserHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.tvUserName);
+            ButterKnife.bind(this, itemView);
             itemView.findViewById(R.id.btnPost).setOnClickListener(view -> openPostFragment(getAdapterPosition()));
         }
     }

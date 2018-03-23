@@ -1,23 +1,18 @@
 package devil.mvplogin.views.fragments;
 
-import android.app.Dialog;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import devil.mvplogin.utils.GeneralFunctions;
+import butterknife.BindView;
 import devil.mvplogin.R;
 import devil.mvplogin.adapters.PostsListAdapter;
 import devil.mvplogin.models.retrofit.pojos.Posts;
+import devil.mvplogin.presenters.BasePresenter;
 import devil.mvplogin.presenters.PostsPresenter;
 import devil.mvplogin.viewInterfaces.PostView;
 
@@ -25,12 +20,12 @@ import devil.mvplogin.viewInterfaces.PostView;
  * Created by devil on 3/23/18.
  */
 
-public class UserPostsFragment extends Fragment implements PostView {
-    private RecyclerView recyclerview;
+public class UserPostsFragment extends BaseFragment implements PostView {
+    @BindView(R.id.recyclerView) RecyclerView recyclerview;
     private PostsListAdapter mAdapter;
     private List<Posts> postsList = new ArrayList<>();
     private int postId;
-    private Dialog mDialog;
+    private PostsPresenter presenter;
 
     public static UserPostsFragment newInstance(Integer postId) {
         UserPostsFragment fragment = new UserPostsFragment();
@@ -41,41 +36,25 @@ public class UserPostsFragment extends Fragment implements PostView {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user_posts, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_user_posts;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        recyclerview = view.findViewById(R.id.recyclerView);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mDialog = GeneralFunctions.dialog(getActivity());
+    protected void init() {
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new PostsListAdapter(getActivity(), postsList);
         recyclerview.setAdapter(mAdapter);
         if (getArguments() != null) {
             postId = getArguments().getInt("postId");
         }
-
-        PostsPresenter presenter = new PostsPresenter(this);
+        presenter = new PostsPresenter(this);
         presenter.loadPosts();
-
     }
 
     @Override
-    public void showDialog() {
-        mDialog.show();
-    }
-
-    @Override
-    public void dismissDialog() {
-        mDialog.dismiss();
+    protected BasePresenter getBasePresenter() {
+        return presenter /*== null ? new PostsPresenter(this) : presenter*/;
     }
 
     @Override
@@ -94,4 +73,6 @@ public class UserPostsFragment extends Fragment implements PostView {
         postsList.addAll(posts);
         mAdapter.notifyDataSetChanged();
     }
+
+
 }

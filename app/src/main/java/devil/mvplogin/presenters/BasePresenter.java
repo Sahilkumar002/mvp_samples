@@ -2,6 +2,8 @@ package devil.mvplogin.presenters;
 
 import java.lang.ref.WeakReference;
 
+import devil.mvplogin.models.BaseInteractor;
+
 /**
  * Created by devil on 3/22/18.
  */
@@ -9,12 +11,12 @@ import java.lang.ref.WeakReference;
 public class BasePresenter<V> {
 
     private WeakReference<V> view;
-
+    protected BaseInteractor interactor;
 
     public void attachView(V view) {
         this.view = new WeakReference<>(view);
+        interactor = new BaseInteractor();
     }
-
 
     protected V getView() {
         return view != null ? view.get() : null;
