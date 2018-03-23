@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import devil.mvplogin.R;
 import devil.mvplogin.models.retrofit.pojos.Users;
 import devil.mvplogin.utils.GeneralFunctions;
-import devil.mvplogin.views.HomeActivity;
+import devil.mvplogin.views.activities.HomeActivity;
 import devil.mvplogin.views.fragments.UserPostsFragment;
 
 /**

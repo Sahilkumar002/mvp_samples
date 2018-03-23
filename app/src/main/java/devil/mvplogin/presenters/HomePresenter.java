@@ -15,44 +15,37 @@ import retrofit2.Response;
  * Created by devil on 3/22/18.
  */
 
-public class HomePresenter extends BasePresenter {
+public class HomePresenter extends BasePresenter<HomeView> {
 
-    private HomeView homeView;
-    private BaseInteractor<List<Users>> interactor;
 
-    public HomePresenter(HomeView homeView) {
-        this.homeView = homeView;
-        interactor = new BaseInteractor<>();
+    @Override
+    public void attachView(HomeView view) {
+        super.attachView(view);
     }
 
-    public void showSavedData() {
-        if (homeView != null) {
-            homeView.showMessage(ApplicationGlobal.getPrefsHelper().getUserName());
-        }
-    }
 
     public void loadUsers() {
-        if (homeView != null) homeView.showDialog();
+        if (getView() != null) getView().showDialog();
 
         interactor.getRetrofitCall(RestClient.getClient().getUsers(), new OnResponseCallBack() {
             @Override
             public void onSuccess(Response<?> response) {
-                homeView.dismissDialog();
+                getView().dismissDialog();
                 try {
                     if (response.code() == 200 && response.body() != null) {
-                        homeView.updateList((List<Users>) response.body());
+                        getView().updateList((List<Users>) response.body());
                     } else {
-                        homeView.showMessage("API Error");
+                        getView().showMessage("API Error");
                     }
                 } catch (Exception e) {
-                    homeView.showMessage(e.getLocalizedMessage());
+                    getView().showMessage(e.getLocalizedMessage());
                 }
             }
 
             @Override
             public void onError(Throwable t) {
-                homeView.dismissDialog();
-                homeView.showMessage(t.getLocalizedMessage());
+                getView().dismissDialog();
+                getView().showMessage(t.getLocalizedMessage());
             }
         });
 

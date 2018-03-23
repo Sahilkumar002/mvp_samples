@@ -10,6 +10,5 @@ import devil.mvplogin.models.retrofit.pojos.Users;
 
 public interface HomeView extends BaseView {
 
-
     void updateList(List<Users> usersList);
 }

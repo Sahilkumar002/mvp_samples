@@ -11,7 +11,7 @@ import devil.mvplogin.models.BaseInteractor;
 public class BasePresenter<V> {
 
     private WeakReference<V> view;
-    protected BaseInteractor interactor;
+    BaseInteractor interactor;
 
     public void attachView(V view) {
         this.view = new WeakReference<>(view);

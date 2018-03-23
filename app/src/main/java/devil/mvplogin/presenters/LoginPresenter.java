@@ -9,27 +9,22 @@ import devil.mvplogin.viewInterfaces.LoginView;
  * Created by devil on 3/22/18.
  */
 
-public class LoginPresenter {
+public class LoginPresenter extends BasePresenter<LoginView> {
 
-    private LoginView loginView;
-
-    public LoginPresenter(LoginView loginView) {
-        this.loginView = loginView;
+    @Override
+    public void attachView(LoginView view) {
+        super.attachView(view);
     }
 
     public void validateCredts(String userName, String password) {
         if (TextUtils.isEmpty(userName)) {
-            loginView.showError("UserName Empty");
+            getView().showError("UserName Empty");
         } else if (TextUtils.isEmpty(password)) {
-            loginView.showError("Password Empty");
+            getView().showError("Password Empty");
         } else {
             ApplicationGlobal.getPrefsHelper().saveUserData(userName);
-            loginView.moveToHome();
+            getView().moveToHome();
         }
-    }
-
-    public void onDetachView() {
-        loginView = null;
     }
 
 }
