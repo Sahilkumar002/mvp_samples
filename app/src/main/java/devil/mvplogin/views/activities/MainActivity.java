@@ -27,6 +27,7 @@ public class MainActivity extends BaseAppCompatActivity implements LoginView {
     @Override
     protected void init() {
         loginPresenter = new LoginPresenter();
+        loginPresenter.attachView(this);
         findViewById(R.id.btnLogin).setOnClickListener(v -> loginPresenter.validateCredts(
                 etUserName.getText().toString().trim(), etPassword.getText().toString().trim()));
     }

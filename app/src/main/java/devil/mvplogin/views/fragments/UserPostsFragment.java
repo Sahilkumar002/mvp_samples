@@ -48,7 +48,8 @@ public class UserPostsFragment extends BaseFragment implements PostView {
         if (getArguments() != null) {
             postId = getArguments().getInt("postId");
         }
-        presenter = new PostsPresenter(this);
+        presenter = new PostsPresenter();
+        presenter.attachView(this);
         presenter.loadPosts();
     }
 

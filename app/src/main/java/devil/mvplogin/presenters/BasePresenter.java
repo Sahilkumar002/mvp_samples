@@ -13,7 +13,6 @@ public class BasePresenter<V> {
 
     public void attachView(V view) {
         this.view = new WeakReference<>(view);
-
     }
 
     protected V getView() {

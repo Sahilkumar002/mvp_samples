@@ -3,6 +3,7 @@ package devil.mvplogin.presenters;
 import android.text.TextUtils;
 
 import devil.mvplogin.utils.ApplicationGlobal;
+import devil.mvplogin.viewInterfaces.HomeView;
 import devil.mvplogin.viewInterfaces.LoginView;
 
 /**
