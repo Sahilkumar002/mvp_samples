@@ -11,10 +11,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import devil.mvplogin.GeneralFunctions;
+import devil.mvplogin.utils.GeneralFunctions;
 import devil.mvplogin.R;
 import devil.mvplogin.adapters.UsersListAdapter;
-import devil.mvplogin.models.Users;
+import devil.mvplogin.models.retrofit.pojos.Users;
 import devil.mvplogin.presenters.HomePresenter;
 import devil.mvplogin.viewInterfaces.HomeView;
 
@@ -29,12 +29,17 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     private UsersListAdapter mAdapter;
     private List<Users> list = new ArrayList<>();
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         dialog = GeneralFunctions.dialog(this);
+
+        init();
+
+    }
+
+    private void init() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new UsersListAdapter(this, list);
@@ -42,13 +47,8 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 
         HomePresenter homePresenter = new HomePresenter(this);
         homePresenter.loadUsers();
-
     }
 
-    @Override
-    public void showData(String userName) {
-        Toast.makeText(this, userName, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void showDialog() {
@@ -58,6 +58,12 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void dismissDialog() {
         if (dialog != null) dialog.dismiss();
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
     }
 

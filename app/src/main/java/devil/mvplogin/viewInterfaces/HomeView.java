@@ -2,19 +2,14 @@ package devil.mvplogin.viewInterfaces;
 
 import java.util.List;
 
-import devil.mvplogin.models.Users;
+import devil.mvplogin.models.retrofit.pojos.Users;
 
 /**
  * Created by devil on 3/22/18.
  */
 
-public interface HomeView {
+public interface HomeView extends BaseView {
 
-    void showData(String userName);
-
-    void showDialog();
-
-    void dismissDialog();
 
     void updateList(List<Users> usersList);
 }

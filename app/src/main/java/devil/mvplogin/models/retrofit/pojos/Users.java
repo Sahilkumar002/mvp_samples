@@ -1,4 +1,4 @@
-package devil.mvplogin.models;
+package devil.mvplogin.models.retrofit.pojos;
 
 /**
  * Created by devil on 3/22/18.

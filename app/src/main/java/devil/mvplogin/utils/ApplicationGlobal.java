@@ -1,4 +1,4 @@
-package devil.mvplogin;
+package devil.mvplogin.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Application;

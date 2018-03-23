@@ -11,7 +11,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import devil.mvplogin.R;
-import devil.mvplogin.models.Users;
+import devil.mvplogin.models.retrofit.pojos.Users;
+import devil.mvplogin.utils.GeneralFunctions;
+import devil.mvplogin.views.HomeActivity;
+import devil.mvplogin.views.fragments.UserPostsFragment;
 
 /**
  * Created by devil on 3/22/18.
@@ -29,6 +32,7 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         this.list = list;
     }
 
+    @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new UserHolder(mLayoutInflater.inflate(R.layout.row_user, parent, false));
@@ -50,6 +54,13 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         public UserHolder(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.tvUserName);
+            itemView.findViewById(R.id.btnPost).setOnClickListener(view -> openPostFragment(getAdapterPosition()));
         }
+    }
+
+    private void openPostFragment(int adapterPosition) {
+        GeneralFunctions.addFragment(((HomeActivity) mContext).getFragmentManager(),
+                UserPostsFragment.newInstance(list.get(adapterPosition).getId()), "Users Post",
+                R.id.flHolder);
     }
 }
