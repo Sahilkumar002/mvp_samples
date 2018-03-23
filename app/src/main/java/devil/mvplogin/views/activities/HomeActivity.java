@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,9 +57,9 @@ public class HomeActivity extends BaseAppCompatActivity implements HomeView {
     }
 
     @Override
-    public void updateList(List<Users> usersList) {
+    public void updateList(List<?> usersList) {
         list.clear();
-        list.addAll(usersList);
+        list.addAll((Collection<? extends Users>) usersList);
         mAdapter.notifyDataSetChanged();
     }
 }

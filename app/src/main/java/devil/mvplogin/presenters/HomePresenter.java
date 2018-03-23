@@ -17,10 +17,12 @@ import retrofit2.Response;
 
 public class HomePresenter extends BasePresenter<HomeView> {
 
+    private BaseInteractor<List<Users>> interactor;
 
     @Override
     public void attachView(HomeView view) {
         super.attachView(view);
+        interactor= new BaseInteractor<>();
     }
 
 
@@ -33,7 +35,7 @@ public class HomePresenter extends BasePresenter<HomeView> {
                 getView().dismissDialog();
                 try {
                     if (response.code() == 200 && response.body() != null) {
-                        getView().updateList((List<Users>) response.body());
+                        getView().updateList((List<?>) response.body());
                     } else {
                         getView().showMessage("API Error");
                     }
