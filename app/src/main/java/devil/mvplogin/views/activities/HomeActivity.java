@@ -57,9 +57,9 @@ public class HomeActivity extends BaseAppCompatActivity implements HomeView {
     }
 
     @Override
-    public void updateList(List<?> usersList) {
+    public void updateList(List<Users> usersList) {
         list.clear();
-        list.addAll((Collection<? extends Users>) usersList);
+        list.addAll(usersList);
         mAdapter.notifyDataSetChanged();
     }
 }

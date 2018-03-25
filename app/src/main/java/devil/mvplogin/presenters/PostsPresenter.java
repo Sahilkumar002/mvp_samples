@@ -7,6 +7,7 @@ import devil.mvplogin.models.retrofit.OnResponseCallBack;
 import devil.mvplogin.models.retrofit.RestClient;
 import devil.mvplogin.models.retrofit.pojos.Posts;
 import devil.mvplogin.viewInterfaces.PostView;
+import retrofit2.Call;
 import retrofit2.Response;
 
 /**
@@ -26,7 +27,7 @@ public class PostsPresenter extends BasePresenter<PostView> {
 
     public void loadPosts() {
         getView().showDialog();
-        interactor.getRetrofitCall(RestClient.getClient().getPosts(getView().getUserId()),
+        interactor.getDisposable(RestClient.getClient().getPosts(getView().getUserId()),
                 new OnResponseCallBack() {
                     @Override
                     public void onSuccess(Response<?> response) {
@@ -49,6 +50,30 @@ public class PostsPresenter extends BasePresenter<PostView> {
                         getView().showMessage(t.getLocalizedMessage());
                     }
                 });
+
+//        interactor.getRetrofitCall(RestClient.getClient().getPosts(getView().getUserId()),
+//                new OnResponseCallBack() {
+//                    @Override
+//                    public void onSuccess(Response<?> response) {
+//                        getView().dismissDialog();
+//                        try {
+//                            if (response.code() == 200 && response.body() != null) {
+//                                getView().updateList((List<Posts>) response.body());
+//                            } else {
+//                                getView().showMessage("API ERROR");
+//                            }
+//
+//                        } catch (Exception e) {
+//                            getView().showMessage(e.getLocalizedMessage());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        getView().dismissDialog();
+//                        getView().showMessage(t.getLocalizedMessage());
+//                    }
+//                });
     }
 
 }
