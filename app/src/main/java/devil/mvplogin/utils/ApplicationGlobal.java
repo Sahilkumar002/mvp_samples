@@ -16,9 +16,9 @@ public class ApplicationGlobal extends Application {
         return prefsHelper;
     }
 
-    public static void setPrefsHelper(AppPrefsHelper prefsHelper) {
-        ApplicationGlobal.prefsHelper = prefsHelper;
-    }
+//    public static void setPrefsHelper(AppPrefsHelper prefsHelper) {
+//        ApplicationGlobal.prefsHelper = prefsHelper;
+//    }
 
     @Override
     public void onCreate() {
