@@ -1,13 +1,10 @@
 package devil.mvplogin.views.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import butterknife.BindInt;
 import butterknife.BindView;
 import devil.mvplogin.R;
 import devil.mvplogin.presenters.LoginPresenter;
@@ -41,6 +38,11 @@ public class MainActivity extends BaseAppCompatActivity implements LoginView {
     public void moveToHome() {
         startActivity(new Intent(this, HomeActivity.class));
         finish();
+    }
+
+    @Override
+    public Context getActivityContext() {
+        return this;
     }
 
 }

@@ -8,12 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import devil.mvplogin.R;
 import devil.mvplogin.models.retrofit.pojos.Users;
+import devil.mvplogin.utils.ApplicationGlobal;
 import devil.mvplogin.utils.GeneralFunctions;
 import devil.mvplogin.views.activities.HomeActivity;
 import devil.mvplogin.views.fragments.UserPostsFragment;
@@ -56,7 +64,22 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         UserHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.findViewById(R.id.btnPost).setOnClickListener(view -> openPostFragment(getAdapterPosition()));
+//            itemView.findViewById(R.id.btnPost).setVisibility(View.GONE);
+            itemView.findViewById(R.id.btnTodo).setVisibility(View.GONE);
+
+            itemView.findViewById(R.id.btnPost).setOnClickListener(view -> deleteUser(getAdapterPosition()));
+        }
+    }
+
+    private void deleteUser(int adapterPosition) {
+        if (adapterPosition < list.size()) {
+            ApplicationGlobal.getDatabaseInstance().getReference(mContext.getString(R.string.user_login_query))
+                    .child(list.get(adapterPosition).getuId()).removeValue().addOnCompleteListener(task -> {
+                        list.remove(adapterPosition);
+                        notifyItemRemoved(adapterPosition);
+                        notifyDataSetChanged();
+                        ((HomeActivity) mContext).showMessage("Item Removed");
+                    });
         }
     }
 

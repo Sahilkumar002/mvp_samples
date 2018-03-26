@@ -3,4 +3,5 @@
     <string name="enter_name">Enter Name</string>
     <string name="enter_password">Enter Password</string>
     <string name="login">Login</string>
+    <string name="user_login_query">User Login</string>
 </resources>

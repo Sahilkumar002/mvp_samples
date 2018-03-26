@@ -11,6 +11,22 @@ public class Users {
     private String email = "";
     private String phone = "";
     private String website = "";
+    private String uId = "";
+
+
+    public Users() {
+    }
+
+    public Users(String uId, String name, String phone) {
+        this.uId = uId;
+        this.name = name;
+        this.phone = phone;
+    }
+
+    public Users(String username, String phone) {
+        this.username = username;
+        this.phone = phone;
+    }
 
     public Integer getId() {
         return id;
@@ -60,4 +76,16 @@ public class Users {
         this.website = website;
     }
 
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
