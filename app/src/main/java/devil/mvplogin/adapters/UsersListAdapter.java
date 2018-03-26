@@ -8,13 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,6 +28,7 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
     private Context mContext;
     private List<Users> list;
     private LayoutInflater mLayoutInflater;
+
 
     public UsersListAdapter(Context mContext, List<Users> list) {
         this.mContext = mContext;
@@ -58,6 +52,7 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
         return list.size();
     }
 
+
     class UserHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvUserName) TextView textView;
 
@@ -72,15 +67,14 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
     }
 
     private void deleteUser(int adapterPosition) {
-        if (adapterPosition < list.size()) {
-            ApplicationGlobal.getDatabaseInstance().getReference(mContext.getString(R.string.user_login_query))
-                    .child(list.get(adapterPosition).getuId()).removeValue().addOnCompleteListener(task -> {
+        ApplicationGlobal.getDatabaseInstance().getReference(mContext.getString(R.string.user_login_query))
+                .child(list.get(adapterPosition).getuId()).removeValue()
+                .addOnCompleteListener(task -> {
+                    if (adapterPosition < list.size()) {
                         list.remove(adapterPosition);
-                        notifyItemRemoved(adapterPosition);
                         notifyDataSetChanged();
-                        ((HomeActivity) mContext).showMessage("Item Removed");
-                    });
-        }
+                    }
+                });
     }
 
     private void openPostFragment(int adapterPosition) {
@@ -88,4 +82,5 @@ public class UsersListAdapter extends RecyclerView.Adapter<UsersListAdapter.User
                 UserPostsFragment.newInstance(list.get(adapterPosition).getId()), "Users Post",
                 R.id.flHolder);
     }
+
 }

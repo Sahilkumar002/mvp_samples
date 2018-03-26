@@ -4,6 +4,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +17,7 @@ import devil.mvplogin.R;
 import devil.mvplogin.adapters.UsersListAdapter;
 import devil.mvplogin.models.retrofit.pojos.Users;
 import devil.mvplogin.presenters.HomePresenter;
+import devil.mvplogin.utils.ApplicationGlobal;
 import devil.mvplogin.viewInterfaces.HomeView;
 
 /**
@@ -62,4 +67,41 @@ public class HomeActivity extends BaseAppCompatActivity implements HomeView {
         list.addAll(usersList);
         mAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        ApplicationGlobal.getDatabaseInstance().getReference().addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//                list.clear();
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Users users = snapshot.getValue(Users.class);
+//                        list.add(users);
+//                }
+//                updateList(list);
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+    }
+
 }
